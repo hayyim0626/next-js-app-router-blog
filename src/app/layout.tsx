@@ -6,8 +6,8 @@ import NavBar from '@/components/NavBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Next JS App Init',
-  description: 'Next JS Application Init',
+  title: 'Chans Dev log',
+  description: 'Chans Dev Log',
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className='flex flex-col w-full max-w-screen-2xl mx-auto'>
         <NavBar />
-        {children}
+        <div className='pt-12'>{children}</div>
       </body>
     </html>
   );

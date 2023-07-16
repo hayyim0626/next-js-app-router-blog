@@ -22,11 +22,11 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
           <Image src={XIcon} width={15} height={15} alt='x icon' />
         </div>
         <ul className='flex flex-col mt-2'>
-          <Link href='/menu1'>
-            <li className='text-center py-2 cursor-pointer'>Menu1</li>
+          <Link href='/about'>
+            <li className='text-center py-2 cursor-pointer'>About</li>
           </Link>
-          <Link href='/menu2'>
-            <li className='text-center py-2 cursor-pointer'>Menu2</li>
+          <Link href='/blog'>
+            <li className='text-center py-2 cursor-pointer'>Blog</li>
           </Link>
           <Link href='/menu3'>
             <li className='text-center py-2 cursor-pointer'>Menu3</li>

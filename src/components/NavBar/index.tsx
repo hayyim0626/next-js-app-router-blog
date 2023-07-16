@@ -10,9 +10,9 @@ export default function NavBar() {
   const [offCanvasClicked, setOffCanvasClicked] = useState<boolean>(false);
 
   return (
-    <nav className='flex flex-row justify-between items-center py-3 px-4'>
+    <nav className='flex flex-row justify-between items-center py-3 px-4 fixed z-10 top-0 bg-white h-12 max-w-screen-2xl w-full'>
       <div className='cursor-pointer'>
-        <Link href='/'>This is Main Logo</Link>
+        <Link href='/'>To Be NFD: Chan's Devlog</Link>
       </div>
       <div
         onClick={() => setOffCanvasClicked(!offCanvasClicked)}
@@ -27,10 +27,10 @@ export default function NavBar() {
       <div className='hidden md:block'>
         <ul className='flex flex-row justify-center items-center'>
           <li className='mr-4 cursor-pointer'>
-            <Link href='/menu1'>Menu1</Link>
+            <Link href='/about'>About</Link>
           </li>
           <li className='mr-4 cursor-pointer'>
-            <Link href='/menu2'>Menu2</Link>
+            <Link href='/blog'>Blog</Link>
           </li>
           <li className='cursor-pointer'>
             <Link href='/menu3'>Menu3</Link>
