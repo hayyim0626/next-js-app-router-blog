@@ -5,12 +5,13 @@ import Link from 'next/link';
 import NavImage from '../../../public/Images/nav/nav-menu.png';
 import OffCnavas from './OffCanvas';
 import { useState } from 'react';
+import ThemeSwitcher from '../ThemeSwitcher';
 
 export default function NavBar() {
   const [offCanvasClicked, setOffCanvasClicked] = useState<boolean>(false);
 
   return (
-    <nav className='flex flex-row justify-between items-center py-3 px-4 fixed z-10 top-0 bg-white h-12 max-w-screen-2xl w-full'>
+    <nav className='flex flex-row justify-between items-center py-3 px-4 fixed z-10 top-0 bg-white h-12 max-w-screen-2xl w-full dark:bg-black'>
       <div className='cursor-pointer'>
         <Link href='/'>To Be NFD: Chan's Devlog</Link>
       </div>
@@ -34,6 +35,9 @@ export default function NavBar() {
           </li>
           <li className='cursor-pointer'>
             <Link href='/menu3'>Menu3</Link>
+          </li>
+          <li>
+            <ThemeSwitcher />
           </li>
         </ul>
       </div>
