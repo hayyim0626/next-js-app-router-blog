@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import XIcon from '../../../public/Images/common/close.png';
+import Link from "next/link";
+import Image from "next/image";
+import XIcon from "/public/Images/common/close.png";
 
 type PropType = {
   isOpen: boolean;
@@ -14,22 +14,22 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
     <div
       onClick={onClose}
       className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center transition-transform duration-500 ${
-        isOpen ? 'translate-y-0' : '-translate-y-full'
+        isOpen ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className='bg-white p-4 absolute flex flex-col top-0 w-full'>
-        <div className='self-end'>
-          <Image src={XIcon} width={15} height={15} alt='x icon' />
+      <div className="bg-white p-4 absolute flex flex-col top-0 w-full">
+        <div className="self-end">
+          <Image src={XIcon} width={15} height={15} alt="x icon" />
         </div>
-        <ul className='flex flex-col mt-2'>
-          <Link href='/about'>
-            <li className='text-center py-2 cursor-pointer'>About</li>
+        <ul className="flex flex-col mt-2">
+          <Link href="/about">
+            <li className="text-center py-2 cursor-pointer">About</li>
           </Link>
-          <Link href='/blog'>
-            <li className='text-center py-2 cursor-pointer'>Blog</li>
+          <Link href="/blog">
+            <li className="text-center py-2 cursor-pointer">Blog</li>
           </Link>
-          <Link href='/menu3'>
-            <li className='text-center py-2 cursor-pointer'>Menu3</li>
+          <Link href="/menu3">
+            <li className="text-center py-2 cursor-pointer">Menu3</li>
           </Link>
         </ul>
       </div>

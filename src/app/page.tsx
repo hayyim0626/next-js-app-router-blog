@@ -1,12 +1,12 @@
 import Card from "@/components/Card";
 import { getAllBlogPosts } from "@/service/blog";
 import Image from "next/image";
-import ProfileImg from "../../public/Images/profile.png";
+import ProfileImg from "/public/Images/profile.png";
 
 export default async function Home() {
   const blogPosts = await getAllBlogPosts();
   return (
-    <main className="px-4 flex flex-col pt-10">
+    <main className="flex flex-col pt-10">
       <div className="flex flex-col items-center">
         <div className="overflow-hidden rounded-full w-52 h-52 border-gray-400 border flex flex-col justify-center">
           <Image src={ProfileImg} alt="profile img" />
