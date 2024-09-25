@@ -17,23 +17,23 @@ export default async function Home() {
           최선을 다하고 있습니다.
         </p>
       </div>
-      <p className="text-2xl mt-6">New Blogs</p>
-      <div className="flex border">
+      {/* <p className="text-2xl mt-6">New Blogs</p> */}
+      {/* <div className="flex border">
         {blogPosts.slice(0, 5).map((el) => (
           <Card key={el.title} data={el} />
         ))}
-      </div>
+      </div> */}
       {/* <Image
         width={200}
         height={200}
         alt="img"
-        src="https://chans-devlog.s3.ap-northeast-2.amazonaws.com/images/javascript.png"
+        src={`${process.env.NEXT_PUBLIC_S3_DOMAIN}/javascript.png`}
       />
       <Image
         width={400}
         height={200}
         alt="img"
-        src="https://chans-devlog.s3.ap-northeast-2.amazonaws.com/images/money-printing.jpeg"
+        src={`${process.env.NEXT_PUBLIC_S3_DOMAIN}/money-printing.jpeg`}
       /> */}
     </main>
   );
