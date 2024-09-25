@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import NavBar from '@/components/NavBar';
-import Provider from './provider';
+import Providers from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className='dark:bg-page-dark'>
-        <Provider>
+    <html lang="en">
+      <body className="dark:bg-page-dark">
+        <Providers>
           <NavBar />
-          <div className='pt-16 max-w-screen-2xl mx-auto h-full'>
+          <div className="pt-16 max-w-screen-2xl mx-auto h-full">
             {children}
           </div>
-        </Provider>
+        </Providers>
       </body>
     </html>
   );
