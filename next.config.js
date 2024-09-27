@@ -1,37 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = (phase, { defaultConfig }) => {
   const env = process.env.NODE_ENV;
-  const s3Domain = process.env.NEXT_PUBLIC_S3_DOMAIN || "";
+  const s3Domain = process.env.NEXT_PUBLIC_S3_DOMAIN || '';
   const hostname = new URL(s3Domain).hostname;
 
   return {
     images: {
-      domains: [hostname],
+      domains: [hostname, 'coin-images.coingecko.com'],
       remotePatterns: [
         {
-          protocol: "https",
+          protocol: 'https',
           hostname: hostname,
-          pathname: "/images/**"
-        }
-      ]
+          pathname: '/images/**',
+        },
+      ],
     },
     // for svg image
     webpack: (config) => {
       config.module.rules.push({
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        use: ["@svgr/webpack"]
+        use: ['@svgr/webpack'],
       });
       return config;
     },
     async rewrites() {
       return [
         {
-          source: "/coin-calculator",
-          destination: "/coinCalculator"
-        }
+          source: '/coin-calculator',
+          destination: '/coinCalculator',
+        },
       ];
-    }
+    },
   };
 };
 
