@@ -29,8 +29,6 @@ export default function CoinCalculatorClient(props: PropType) {
     return null;
   }, [selectedCoin?.value, coinList]);
 
-  console.log(dropdownList);
-
   const handleSelectCoin = (value: string) => {
     setSelectedCoinList(dropdownList.find((el) => el.value === value) || null);
   };
