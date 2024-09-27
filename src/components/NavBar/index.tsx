@@ -43,7 +43,7 @@ export default function NavBar() {
               <Link href="/blog">Blog</Link>
             </li>
             <li className="cursor-pointer">
-              <Link href="/coin-calculator">Coin Calaulator</Link>
+              <Link href="/coin-calculator">코인 계산기</Link>
             </li>
             <li>
               <ThemeSwitcher />

@@ -18,7 +18,7 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
     <>
       {isOpen && (
         <div
-          className='fixed inset-0 bg-gray-700 opacity-50'
+          className="fixed inset-0 bg-gray-700 opacity-50"
           onClick={onClose}
         />
       )}
@@ -27,51 +27,51 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <ul className='flex flex-col mt-2'>
+        <ul className="flex flex-col mt-2">
           <li
             onClick={onClose}
-            className='flex items-center flex-row-reverse pt-2 px-3 dark:text-white'
+            className="flex items-center flex-row-reverse pt-2 px-3 dark:text-white"
           >
             <XIcon />
           </li>
           <li
             onClick={onClose}
-            className='text-center mt-3 py-2 cursor-pointer'
+            className="text-center mt-3 py-2 cursor-pointer"
           >
-            <Link href='/about'>About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li
             onClick={onClose}
-            className='text-center mt-3 py-2 cursor-pointer'
+            className="text-center mt-3 py-2 cursor-pointer"
           >
-            <Link href='/blog'>Blog</Link>
+            <Link href="/blog">Blog</Link>
           </li>
           <li
             onClick={onClose}
-            className='text-center mt-3 py-2 cursor-pointer'
+            className="text-center mt-3 py-2 cursor-pointer"
           >
-            <Link href='/menu3'>Menu3</Link>
+            <Link href="/coin-calculator">코인 계산기</Link>
           </li>
-          <li className='border-b dark:border-gray-500 mt-3 mx-3' />
-          <li className='px-3'>
-            <label className='items-center cursor-pointer py-2 inline-block'>
-              <div className='relative'>
+          <li className="border-b dark:border-gray-500 mt-3 mx-3" />
+          <li className="px-3">
+            <label className="items-center cursor-pointer py-2 inline-block">
+              <div className="relative">
                 <input
-                  type='checkbox'
-                  className='sr-only'
+                  type="checkbox"
+                  className="sr-only"
                   checked={theme === 'dark'}
                   onChange={() =>
                     setTheme(theme === 'light' ? 'dark' : 'light')
                   }
                 />
-                <div className='block bg-gray-200 dark:bg-gray-700 w-15 h-7.5 rounded-full'>
+                <div className="block bg-gray-200 dark:bg-gray-700 w-15 h-7.5 rounded-full">
                   {theme === 'light' ? (
-                    <div className='w-4.5 h-4.5 text-gray-400 absolute top-1.5 right-1.5'>
-                      <DarkIcon fill='currentColor' />
+                    <div className="w-4.5 h-4.5 text-gray-400 absolute top-1.5 right-1.5">
+                      <DarkIcon fill="currentColor" />
                     </div>
                   ) : (
-                    <div className='w-4.5 h-4.5 text-gray-400 absolute top-1.5 left-1.5'>
-                      <LightIcon fill='currentColor' />
+                    <div className="w-4.5 h-4.5 text-gray-400 absolute top-1.5 left-1.5">
+                      <LightIcon fill="currentColor" />
                     </div>
                   )}
                 </div>
@@ -81,12 +81,12 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
                   }`}
                 >
                   {theme === 'light' ? (
-                    <div className='w-4.5 h-4.5 text-red-500 absolute top-0.75 left-0.75'>
-                      <LightIcon fill='currentColor' />
+                    <div className="w-4.5 h-4.5 text-red-500 absolute top-0.75 left-0.75">
+                      <LightIcon fill="currentColor" />
                     </div>
                   ) : (
-                    <div className='w-4.5 h-4.5 text-amber-400 absolute top-0.75 left-0.75'>
-                      <DarkIcon fill='currentColor' />
+                    <div className="w-4.5 h-4.5 text-amber-400 absolute top-0.75 left-0.75">
+                      <DarkIcon fill="currentColor" />
                     </div>
                   )}
                 </div>
