@@ -21,9 +21,9 @@ export default function RootLayout({
       <body className="dark:bg-page-dark">
         <Providers>
           <NavBar />
-          <div className="pt-16 max-w-screen-2xl mx-auto h-full">
+          <main className="pt-16 max-w-screen-2xl mx-auto h-full">
             {children}
-          </div>
+          </main>
         </Providers>
       </body>
     </html>
