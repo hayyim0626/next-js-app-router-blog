@@ -34,45 +34,52 @@ export default function CoinCalculatorClient(props: PropType) {
   };
 
   return (
-    <article className="max-w-[50%] mx-auto py-12">
+    <article className="max-w-[50%] mx-auto pt-12">
       <Dropdown
+        width="w-full"
         selected={selectedCoin}
         data={dropdownList}
         handleSelect={handleSelectCoin}
         labelText="계산할 코인을 선택하세요"
       />
       {selectedCoinInfo && (
-        <div className="py-4 flex flex-col items-start gap-2">
+        <div className="py-4 flex flex-col items-start gap-2 bg-slate-800 rounded-xl p-3 my-4">
           <h5 className="h5 text-center text-blue-500">Coin Info</h5>
-          <p>
-            Name: <span className="text-blue-400">{selectedCoinInfo.name}</span>
-          </p>
-          <p>
-            Current Price:{' '}
-            <span className="text-blue-400">
+          <div className="flex items-center justify-between w-full">
+            Name:
+            <p className="text-blue-400">{selectedCoinInfo.name}</p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            Current Price:
+            <p className="text-blue-400">
               ${withCommas(selectedCoinInfo.current_price)}
-            </span>
-          </p>
-          <p>
-            Market cap:{' '}
-            <span className="text-blue-400">
+            </p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            Rank:
+            <p className="text-blue-400">{selectedCoinInfo.market_cap_rank}</p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            Market cap:
+            <p className="text-blue-400">
               ${withCommas(selectedCoinInfo.market_cap)}
-            </span>
-          </p>
-          <p>
-            High 24h:{' '}
-            <span className="text-blue-400">
+            </p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            High 24h:
+            <p className="text-blue-400">
               ${withCommas(selectedCoinInfo.high_24h)}
-            </span>
-          </p>
-          <p>
-            Low 24h:{' '}
-            <span className="text-blue-400">
+            </p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            Low 24h:
+            <p className="text-blue-400">
               ${withCommas(selectedCoinInfo.low_24h)}
-            </span>
-          </p>
+            </p>
+          </div>
         </div>
       )}
+      <p>입력 수량</p>
     </article>
   );
 }
