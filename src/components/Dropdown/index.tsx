@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 interface PropType {
+  width?: string;
   selected: DropDownDefault | null;
   data: DropDownDefault[];
   handleSelect: (data: string) => void;
@@ -19,22 +20,46 @@ export interface DropDownDefault {
 const Dropdown: React.FC<PropType> = (props) => {
   const { selected, data, handleSelect, labelText = '' } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOption = (value: string) => {
     handleSelect(value);
     setIsOpen(false);
   };
 
+  const isNodeType = (eTarget: EventTarget): eTarget is Node =>
+    'nodeType' in eTarget;
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      event.target &&
+      isNodeType(event.target) &&
+      !dropdownRef.current.contains(event.target)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
     <>
-      {labelText && <p className="text-sm mb-0.5">{labelText}</p>}
-      <div className="relative w-64">
+      {labelText && <p className="mb-0.5">{labelText}</p>}
+      <div
+        className={`relative min-w-64 ${props.width || ''}`}
+        ref={dropdownRef}
+      >
         <div
           className="flex items-center justify-between p-2 border rounded-lg cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {selected && (
-            <>
+            <div className="flex items-center">
               {selected.img && (
                 <Image
                   width={24}
@@ -44,11 +69,11 @@ const Dropdown: React.FC<PropType> = (props) => {
                 />
               )}
               <span className="ml-2">{selected.label}</span>
-            </>
+            </div>
           )}
-          <span className="ml-2">▼</span>
+          <span className={`ml-2 ${isOpen ? 'rotate-180' : ''}`}>▼</span>
         </div>
-        {isOpen && selected && (
+        {isOpen && (
           <ul className="absolute bg-page-dark z-10 w-full mt-1 border rounded-lg shadow-lg max-h-60 overflow-auto flex flex-col gap-2 p-2">
             {data.map((el, idx) => (
               <li
