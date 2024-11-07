@@ -14,3 +14,7 @@ export const withCommas = (amount: string | number): string => {
     return comma(integar) + '.' + decimal;
   }
 };
+
+export const wait = (time: number) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
