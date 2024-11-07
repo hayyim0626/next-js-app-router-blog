@@ -74,11 +74,11 @@ const Dropdown: React.FC<PropType> = (props) => {
           <span className={`ml-2 ${isOpen ? 'rotate-180' : ''}`}>▼</span>
         </div>
         {isOpen && (
-          <ul className="absolute bg-page-dark z-10 w-full mt-1 border rounded-lg shadow-lg max-h-60 overflow-auto flex flex-col gap-2 p-2">
+          <ul className="absolute dark:bg-page-dark bg-white z-10 w-full mt-1 border rounded-lg shadow-lg max-h-60 overflow-auto flex flex-col gap-2 p-2">
             {data.map((el, idx) => (
               <li
                 key={`${el.label}-${idx}`}
-                className="flex items-center p-2 hover:bg-slate-500 cursor-pointer rounded-2xl"
+                className="flex items-center p-2 hover:dark:bg-slate-500 hover:bg-sky-100 cursor-pointer rounded-2xl"
                 onClick={() => handleClickOption(el.value)}
               >
                 {el.img && (
