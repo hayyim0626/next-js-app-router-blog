@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { CoinList } from '@/apis/types';
+import { withCommas, removeCommas } from '@/utils/functions';
 import Button from '@/components/Button';
 import Dropdown, { DropDownDefault } from '@/components/Dropdown';
 import CoinInfo from '@/components/CoinInfo';
@@ -59,7 +60,9 @@ export default function CoinCalculatorClient(props: PropType) {
   }) => {
     setEnterValue(
       enterValue.map((item) =>
-        item.id === id ? { ...item, [target]: event.target.value } : item
+        item.id === id
+          ? { ...item, [target]: withCommas(removeCommas(event.target.value)) }
+          : item
       )
     );
   };
@@ -70,14 +73,15 @@ export default function CoinCalculatorClient(props: PropType) {
 
   const handleCalcuate = () => {
     const totalCost = enterValue.reduce(
-      (acc, val) => acc + Number(val.amount) * Number(val.price),
+      (acc, val) =>
+        acc +
+        Number(removeCommas(val.amount)) * Number(removeCommas(val.price)),
       0
     );
     const totalAmount = enterValue.reduce(
-      (acc, val) => acc + Number(val.amount),
+      (acc, val) => acc + Number(removeCommas(val.amount)),
       0
     );
-    console.log(totalCost / totalAmount);
     setCalculatedPrice(totalCost / totalAmount);
   };
 
@@ -160,10 +164,13 @@ export default function CoinCalculatorClient(props: PropType) {
         </div>
       </article>
       <article className="mt-6 pb-20">
-        <p>{selectedCoin?.value} 평단가는!</p>
+        <p>나의 {selectedCoin?.value} 평단가는!</p>
         <div className="py-4 flex flex-col items-start gap-2 dark:bg-slate-800 bg-sky-100 rounded-xl px-3 mt-3">
           <h3 className="h3">
-            {calculatedPrice ? calculatedPrice : '두구두구'}
+            ${' '}
+            {calculatedPrice
+              ? withCommas(calculatedPrice.toFixed(2))
+              : '두구두구'}
           </h3>
         </div>
       </article>
