@@ -15,6 +15,10 @@ export const withCommas = (amount: string | number): string => {
   }
 };
 
+export const removeCommas = (amount: string): string => {
+  return amount.replace(/,/g, '');
+};
+
 export const wait = (time: number) => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
