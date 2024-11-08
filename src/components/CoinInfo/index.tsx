@@ -3,9 +3,11 @@ import { withCommas } from '@/utils/functions';
 
 interface PropType {
   coinInfo: CoinList | undefined;
+  isUsdMode: boolean;
+  krwPrice: number;
 }
 const CoinInfo: React.FC<PropType> = (props) => {
-  const { coinInfo } = props;
+  const { coinInfo, isUsdMode, krwPrice } = props;
   if (!coinInfo) return <p>Sth Error...Please try again later</p>;
 
   return (
@@ -18,7 +20,11 @@ const CoinInfo: React.FC<PropType> = (props) => {
       <div className="flex items-center justify-between w-full">
         Current Price:
         <p className="text-blue-700 dark:text-blue-100">
-          ${withCommas(coinInfo.current_price)}
+          {withCommas(
+            isUsdMode
+              ? '$' + coinInfo.current_price
+              : '₩' + (coinInfo.current_price * krwPrice).toFixed(0)
+          )}
         </p>
       </div>
       <div className="flex items-center justify-between w-full">
@@ -30,19 +36,31 @@ const CoinInfo: React.FC<PropType> = (props) => {
       <div className="flex items-center justify-between w-full">
         Market cap:
         <p className="text-blue-700 dark:text-blue-100">
-          ${withCommas(coinInfo.market_cap)}
+          {withCommas(
+            isUsdMode
+              ? '$' + coinInfo.market_cap
+              : '₩' + (coinInfo.market_cap * krwPrice).toFixed(0)
+          )}
         </p>
       </div>
       <div className="flex items-center justify-between w-full">
         High 24h:
         <p className="text-blue-700 dark:text-blue-100">
-          ${withCommas(coinInfo.high_24h)}
+          {withCommas(
+            isUsdMode
+              ? '$' + coinInfo.high_24h
+              : '₩' + (coinInfo.high_24h * krwPrice).toFixed(0)
+          )}
         </p>
       </div>
       <div className="flex items-center justify-between w-full">
         Low 24h:
         <p className="text-blue-700 dark:text-blue-100">
-          ${withCommas(coinInfo.low_24h)}
+          {withCommas(
+            isUsdMode
+              ? '$' + coinInfo.low_24h
+              : '₩' + (coinInfo.low_24h * krwPrice).toFixed(0)
+          )}
         </p>
       </div>
     </div>

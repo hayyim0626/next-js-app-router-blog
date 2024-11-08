@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { CoinList } from '@/apis/types';
 import { withCommas, removeCommas } from '@/utils/functions';
@@ -9,6 +9,7 @@ import Dropdown, { DropDownDefault } from '@/components/Dropdown';
 import CoinInfo from '@/components/CoinInfo';
 interface PropType {
   coinList: CoinList[];
+  krwPrice: number;
 }
 
 interface EnterValue {
@@ -18,19 +19,25 @@ interface EnterValue {
 }
 
 export default function CoinCalculatorClient(props: PropType) {
-  const { coinList } = props;
+  const { coinList, krwPrice } = props;
   const dropdownList = coinList.map((el) => ({
     label: el.symbol.toUpperCase(),
     value: el.symbol.toUpperCase(),
     img: el.image,
   }));
-  const [selectedCoin, setSelectedCoinList] = useState<DropDownDefault>(
+  const [selectedCountry, setSelectedCountry] = useState<'🇺🇸' | '🇰🇷'>('🇺🇸');
+  const [selectedCoin, setSelectedCoin] = useState<DropDownDefault>(
     dropdownList[0]
   );
   const [enterValue, setEnterValue] = useState<EnterValue[]>([
     { amount: '', price: '', id: 1 },
   ]);
-  const [calculatedPrice, setCalculatedPrice] = useState<number | null>(null);
+  const [calculatedPrice, setCalculatedPrice] = useState<number>(0);
+
+  useEffect(() => {
+    handleInitInput();
+  }, [selectedCoin]);
+
   const selectedCoinInfo = useMemo(() => {
     return coinList.find(
       (el) => el.symbol.toUpperCase() === selectedCoin.value
@@ -39,7 +46,7 @@ export default function CoinCalculatorClient(props: PropType) {
 
   const handleSelectCoin = (value: string) => {
     const selected = dropdownList.find((el) => el.value === value);
-    selected && setSelectedCoinList(selected);
+    selected && setSelectedCoin(selected);
   };
 
   const handleClickAddBtn = () => {
@@ -67,8 +74,13 @@ export default function CoinCalculatorClient(props: PropType) {
     );
   };
 
-  const deleteEnterInputs = (id: number) => {
+  const handleDeleteInput = (id: number) => {
     setEnterValue(enterValue.filter((el) => el.id !== id));
+  };
+
+  const handleInitInput = () => {
+    setEnterValue([{ amount: '', price: '', id: 1 }]);
+    setCalculatedPrice(0);
   };
 
   const handleCalcuate = () => {
@@ -87,7 +99,18 @@ export default function CoinCalculatorClient(props: PropType) {
 
   return (
     <section className="max-w-[50%] mx-auto pt-32">
-      <div>
+      <div className="flex items-center justify-between">
+        기준 통화(USD/KRW){' '}
+        <button
+          onClick={() =>
+            setSelectedCountry(selectedCountry === '🇺🇸' ? '🇰🇷' : '🇺🇸')
+          }
+          className="text-2xl"
+        >
+          {selectedCountry}
+        </button>
+      </div>
+      <div className="mt-6">
         <Dropdown
           width="w-full"
           selected={selectedCoin}
@@ -95,7 +118,11 @@ export default function CoinCalculatorClient(props: PropType) {
           handleSelect={handleSelectCoin}
           labelText="계산할 코인을 선택하세요"
         />
-        <CoinInfo coinInfo={selectedCoinInfo} />
+        <CoinInfo
+          coinInfo={selectedCoinInfo}
+          isUsdMode={selectedCountry === '🇺🇸'}
+          krwPrice={krwPrice}
+        />
       </div>
       <article className="mt-6">
         <p>체결 가격과 수량을 입력하세요</p>
@@ -143,7 +170,7 @@ export default function CoinCalculatorClient(props: PropType) {
                 ) : (
                   <button
                     type="button"
-                    onClick={() => deleteEnterInputs(el.id)}
+                    onClick={() => handleDeleteInput(el.id)}
                   >
                     <Image
                       width={22}
@@ -156,21 +183,31 @@ export default function CoinCalculatorClient(props: PropType) {
               </div>
             ))}
           </div>
-          <Button
-            text="계산하기"
-            className="w-full mt-3"
-            onClick={handleCalcuate}
-          />
+          <div className="flex items-center gap-3">
+            <Button
+              text="계산하기"
+              className="w-full mt-3"
+              onClick={handleCalcuate}
+            />
+            {calculatedPrice && (
+              <Button
+                text="초기화"
+                className="w-full mt-3"
+                onClick={handleInitInput}
+              />
+            )}
+          </div>
         </div>
       </article>
       <article className="mt-6 pb-20">
-        <p>나의 {selectedCoin?.value} 평단가는!</p>
+        <p>나의 {selectedCoin?.value} 평단가는?!</p>
         <div className="py-4 flex flex-col items-start gap-2 dark:bg-slate-800 bg-sky-100 rounded-xl px-3 mt-3">
           <h3 className="h3">
-            ${' '}
             {calculatedPrice
-              ? withCommas(calculatedPrice.toFixed(2))
-              : '두구두구'}
+              ? selectedCountry === '🇺🇸'
+                ? '$' + withCommas(calculatedPrice.toFixed(2))
+                : '₩' + withCommas((calculatedPrice * krwPrice).toFixed(0))
+              : '두구두구두구두구'}
           </h3>
         </div>
       </article>
