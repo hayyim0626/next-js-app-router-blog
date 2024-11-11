@@ -46,12 +46,6 @@ export default function OffCanvas({ isOpen, onClose }: PropType) {
           >
             <Link href="/blog">Blog</Link>
           </li>
-          <li
-            onClick={onClose}
-            className="text-center mt-3 py-2 cursor-pointer"
-          >
-            <Link href="/coin-calculator">코인 계산기</Link>
-          </li>
           <li className="border-b dark:border-gray-500 mt-3 mx-3" />
           <li className="px-3">
             <label className="items-center cursor-pointer py-2 inline-block">

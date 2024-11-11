@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import OffCnavas from "./OffCanvas";
-import { useState } from "react";
-import ThemeSwitcher from "@/components/Switch/Theme";
-import NavImage from "/public/Images/nav/menu.svg";
-import NavFacIcon from "/public/Images/nav/ychong.png";
+import Image from 'next/image';
+import Link from 'next/link';
+import OffCnavas from './OffCanvas';
+import { useState } from 'react';
+import ThemeSwitcher from '@/components/Switch/Theme';
+import NavImage from '/public/Images/nav/menu.svg';
+import NavFacIcon from '/public/Images/nav/ychong.png';
 
 export default function NavBar() {
   const [offCanvasClicked, setOffCanvasClicked] = useState<boolean>(false);
@@ -16,7 +16,7 @@ export default function NavBar() {
       <div className="max-w-screen-2xl mx-auto w-full flex flex-row justify-between items-center">
         <div className="flex flox-row items-center cursor-pointer">
           <Image
-            style={{ marginRight: "8px" }}
+            style={{ marginRight: '8px' }}
             src={NavFacIcon}
             width={20}
             height={20}
@@ -41,9 +41,6 @@ export default function NavBar() {
             </li>
             <li className="mr-4 cursor-pointer">
               <Link href="/blog">Blog</Link>
-            </li>
-            <li className="cursor-pointer">
-              <Link href="/coin-calculator">코인 계산기</Link>
             </li>
             <li>
               <ThemeSwitcher />

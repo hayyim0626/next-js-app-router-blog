@@ -66,6 +66,7 @@ const Dropdown: React.FC<PropType> = (props) => {
                   height={24}
                   src={selected.img}
                   alt={selected.label}
+                  style={{ height: 'auto', width: 'auto' }}
                 />
               )}
               <span className="ml-2">{selected.label}</span>
